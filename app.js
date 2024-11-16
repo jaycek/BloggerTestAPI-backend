@@ -15,9 +15,13 @@ async function main() {
 main().then(console.log("Connected to DB")).catch(err => console.log(err));
 
 app.use(express.json())
-app.use(cors())
+// app.use(cors())
 
-
+app.use(cors({
+    origin: 'https://bloggertestapi-frontend.onrender.com', // Allow specific origin
+    methods: 'GET,POST,PUT,DELETE', // Specify allowed methods
+    credentials: true, // Include this if you need cookies/auth headers
+}));
 app.use('/users',userRouter)
 app.use('/posts',postRouter)
 
